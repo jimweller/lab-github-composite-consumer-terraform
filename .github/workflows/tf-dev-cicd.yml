@@ -1,0 +1,19 @@
+name: Terraform Deploy from Composite Action
+on:
+  push:
+
+jobs:
+  terraform-deploy:
+    name: terraform-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Terraform Deploy
+        id: terraform-deploy
+        uses: ExampleCoSoftware/jira-demo-github-composite-actions/tfpipeline@v1
+        with:
+          aws_access_key: ${{ secrets.AWS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET }}
+          aws_iam_role: ${{ secrets.AWS_ROLE }}
+          aws_session_name: tf-deploy-central-action-consumer-demo
